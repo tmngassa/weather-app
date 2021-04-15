@@ -17,18 +17,20 @@ export default class WeekDays extends Component {
     }
 
     componentDidMount = () => {
+        
+        useEffect(() => {fetchWeatherReadings()}, [])
 
-        const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${apiKey}`
+        // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${apiKey}`
 
-        fetch(weatherURL)
-            .then(res => res.json())
-            .then(data => {
-            const dailyData = data.list.filter(reading => reading.dt_txt.includes("18:00:00"))
-            this.setState({
-                fullData: data.list,
-                dailyData: dailyData
-            }, () => console.log(this.state))
-            })
+        // fetch(weatherURL)
+        //     .then(res => res.json())
+        //     .then(data => {
+        //     const dailyData = data.list.filter(reading => reading.dt_txt.includes("18:00:00"))
+        //     this.setState({
+        //         fullData: data.list,
+        //         dailyData: dailyData
+        //     }, () => console.log(this.state))
+        //     })
     }
 
     updateForecastDegree = event => {
@@ -54,3 +56,21 @@ export default class WeekDays extends Component {
         )
     }
 }
+
+
+const mapStateToProps = state => {
+    return {
+      fetchWeatherReadings: state.fetchWeatherReadings
+    }
+  }
+  
+  const mapDispatchToProps = dispatch => {
+    return {
+        fetchWeatherReadings: () => dispatch(fetchWeatherReadings())
+    }
+  }
+  
+  export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(WeekDays)
