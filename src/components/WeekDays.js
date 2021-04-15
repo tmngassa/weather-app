@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, useEffect } from 'react'
 import { apiKey } from '../apiConfig';
 import DayCard from './DayCard'
 import ToggleDegree from './ToggleDegree'
+import { fetchWeatherReadings } from './redux'
 
 export default class WeekDays extends Component {
     
@@ -16,19 +17,6 @@ export default class WeekDays extends Component {
     }
 
     componentDidMount = () => {
-        
-        // if ("geolocation" in navigator) {
-        //     // Do something with coordinates returned
-        //     function processCoords(position) {
-        //         let latitude = position.coords.latitude;
-        //         let longitude = position.coords.longitude;
-        //         console.log('latitude: ' , latitude)
-        //         console.log('latitude: ' , longitude)
-        //     }
-        
-        //     // Fetch Coordinates
-        //     navigator.geolocation.getCurrentPosition(processCoords);
-        // }
 
         const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${apiKey}`
 
@@ -60,9 +48,7 @@ export default class WeekDays extends Component {
                 <h5 className="display-5 text-muted">Maryland, US</h5>
                 <ToggleDegree degreeType={this.state.degreeType} updateForecastDegree={this.updateForecastDegree}/>
                 <div className="row justify-content-center">
-
                     {this.displayDayCard()}                    
-
                 </div>
             </div>
         )
