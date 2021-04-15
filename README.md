@@ -1,6 +1,6 @@
 # weather-app
 
-## Requirement
+## Requirements
 
 Have the mode recet version of node
 
